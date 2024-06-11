@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}to-do-list{% endblock %}
+{% block content %}
+<div class="user-info bg-light p-4 rounded">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="d-flex align-items-center">
+                <!-- If no image is available, you can display a placeholder icon or initials -->
+                <div>
+                    <p class="user-name fs-4 mb-0">{{ current_user.first_name }}</p>
+                    <!-- Additional user information (e.g., last name, email) can be added here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-end">
+            <p class="xp-level fs-5 mb-0">XP : {{ current_user.xp }}</p>
+        </div>
+        <div class="col-md-3 text-end">
+            <p class="level fs-5 mb-0">Level : {{ current_user.level }}</p>
+        </div>
+    </div>
+</div>
+<h1 align="center">To-do-list</h1>
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">
+        {{ note.data }}
+        <!-- cancel btn  -->
+        <button type="button" class="close cancel-btn" onClick="deleteNote({{ note.id }})">
+            <span aria-hidden="true">&times;</span>
+            <span class="tooltip">Cancel</span>
+        </button>
+        <!-- done btn  -->
+        <button type="button" class="close done-btn" onClick="updateXP({{ note.id }})">
+            <span aria-hidden="true">&check;</span>
+            <span class="tooltip">Done</span>
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+<form method="POST" id="task-form">
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="difficulty">Select Difficulty</label>
+        <textarea class="form-control" id="difficulty" name="difficulty" rows="1">{{ task_difficulty }}</textarea>
+    </div>
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>
+{% endblock %}
