@@ -1,2 +1,2 @@
-# todolist
-todolist website in shape of game 
+# todolist web app ✅
+- Flask Web App(authentication, databases,API,  and more)
